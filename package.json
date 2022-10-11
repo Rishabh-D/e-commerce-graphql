@@ -1,0 +1,24 @@
+{
+  "name": "e-commerce-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishabh-D/e-commerce-graphql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rishabh-D/e-commerce-graphql/issues"
+  },
+  "homepage": "https://github.com/Rishabh-D/e-commerce-graphql#readme",
+  "dependencies": {
+    "apollo-server": "^3.10.3",
+    "graphql": "^16.6.0"
+  }
+}
