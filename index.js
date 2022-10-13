@@ -110,8 +110,6 @@ let categories = [
   },
 ];
 
-
-
 const typeDefs = gql`
   type Query {
     hello: String,
@@ -120,18 +118,27 @@ const typeDefs = gql`
     isCool: Boolean
     products: [Product!]!,
     product(id: String!): Product
+    categories: [Category!]!
+    category(id:ID!): Category
   }
 
   type Product {
+    id: ID!
     name: String!
     description:String!,
     price: Float!
     quantity: Int!
     onSale: Boolean!
     image: String!
+    category: Category
+  }
+
+  type Category {
+    id: ID!
+    name: String!
+    products: [Product!]!
   }
 `
-
 
 const resolvers = {
   Query: {
@@ -161,9 +168,32 @@ const resolvers = {
       const res = products.find(product => product.id === args.id)
       if (!res) return null
       return res
+    },
+    categories: () => {
+      return categories
+    },
+    category: (parent, args, context) => {
+      return categories.find(catergory => catergory.id === args.id)
     }
   },
-}
+
+  Category: {
+    products: (parent, args, context) => {
+      const categoryId = parent.id
+      console.log(categoryId)
+      return products.filter(product => product.categoryId == categoryId)
+    }
+  },
+
+  Product: {
+    category: (parent, args, context) => {
+      const catergoryId = parent.categoryId
+      return categories.find(category => category.id === catergoryId)
+    }
+
+    }
+  }
+
 
 const server = new ApolloServer({typeDefs, resolvers});
 
